@@ -259,4 +259,4 @@ def return_book(request, transaction_id):
         else:
             messages.error(request, 'Invalid transaction.')
 
-    return redirect('profile')
+    return redirect('report')
