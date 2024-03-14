@@ -93,7 +93,7 @@ class TransactionCreateMixin(LoginRequiredMixin, CreateView):
     template_name = 'transaction_form.html'
     model = Transaction
     title = ''
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('report')
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs.update({
@@ -152,15 +152,15 @@ def borrow_book(request, book_id):
     if user_account.balance >= book.borrowing_price:
         user_account.balance -= book.borrowing_price
         user_account.save()
-        # when user borrow book borrow_book status=true
+        
         book.borrow_book=True
-        # Decrease available copies of the book by 1
+       
         book.available_copies -= 1
         book.save()
-        # Set the borrowing date
+       
         borrowing_date = datetime.now()
 
-        # Create a transaction record
+       
         Transaction.objects.create(
             account=user_account,
             book=book,
@@ -194,7 +194,7 @@ class TransactionReportView(LoginRequiredMixin, ListView):
     balance = 0 
     
     def get_queryset(self):
-        # jodi user kono type filter nh kore taile tar total transition report dekhabo
+        
         queryset = super().get_queryset().filter(
             account=self.request.user.account,
             transaction_type=BOOK_RETURN
@@ -218,16 +218,14 @@ class TransactionReportView(LoginRequiredMixin, ListView):
         else:
             self.balance = self.request.user.account.balance
         queryset = queryset.select_related('book') 
-        return queryset.distinct() # unique queryset hote hobe
-    # def get_wishlist(self):
-    #     return Wishlist.objects.filter(user=self.request.user)
+        return queryset.distinct() 
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
             'account': self.request.user.account,
             'borrowing_history': context['object_list'], 
-            #  'wishlist': self.get_wishlist(), 
-
+            
         })
 
         return context
