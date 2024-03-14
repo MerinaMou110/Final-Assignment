@@ -34,6 +34,8 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ['https://final-assignment-1.onrender.com','https://*.127.0.0.1'] # first part will be your deploy project’s domain name
 
 
 # Application definition
