@@ -1,0 +1,87 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg fixed">
+  <div class="container-fluid">
+    <a class="navbar-brand me-auto" href="#">Book Destiny</a>
+    
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Book Destiny</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="{% url 'report'%}">Report</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="{% url 'profile'%}">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="{% url 'deposit_money'%}">Deposit</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="#">Service</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="#">Contact</a>
+          </li>
+          <a href="{% url 'wishlist' %}" class="nav-link mx-lg-2">
+            <i class="fas fa-shopping-cart"></i> <!-- Assuming you're using Font Awesome for icons -->
+          </a>
+          <div class="navbar-nav">
+            <span class="navbar-text text-primary ms-auto me-5">
+              Welcome, {{ request.user.first_name }} (balance: {{ request.user.account.balance }})
+            </span>
+          </div>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+    {% if request.user.is_authenticated %}
+   <form  action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-link login-button">Logout</button>
+    
+   </form>
+   {% else %}
+   <a href="{% url 'register'%}" class="login-button mx-3">Signup</a>
+
+    <a href="{% url 'login'%}" class="login-button mx-3">Login</a>
+    
+    {% endif %}
+    
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+  </div>
+</nav>

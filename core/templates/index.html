@@ -1,0 +1,194 @@
+{% extends 'base.html' %} {% load static %} {% block head_title %}Library
+Management System{% endblock %} {% block content %}
+<div class="container mt-3 p-4">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h1>Welcome to our library</h1>
+          <p>
+            Immerse yourself in the rich tapestry of stories waiting to be
+            explored within our library's extensive collection. Whether you're
+            drawn to the captivating narratives of fiction or the insightful
+            wisdom of non-fiction, there's something here for every reader.
+            Borrow books with ease, leave your mark with thoughtful reviews, and
+            embark on a journey of discovery unlike any other. Our library's
+            user-friendly system ensures that accessing these literary treasures
+            is simple and convenient. Create an account effortlessly, borrow
+            books with just a few clicks, and keep track of your reading history
+            seamlessly. With each page turned, you'll unlock new realms of
+            imagination and knowledge, enriching your life in ways you never
+            thought possible. Join us as we celebrate the boundless power of
+            literature to inspire, educate, and ignite the imagination. Let the
+            pages of our books transport you to worlds both familiar and
+            fantastical.
+          </p>
+          <div class="d-flex justify-content-end">
+            <a href="{% url 'register' %}" class="btn btn-primary">Join Now</a>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <img
+          src="{% static 'img/library2.jpeg' %}"
+          class="card-img-top rounded"
+          alt="Library Image"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="carousel-wrapper" style="background-color: #76ABAE; padding: 20px;">
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div
+        class="d-flex container row m-auto align-items-center justify-content-around"
+      >
+        <div class="write col-md-9">
+          <h2>Latest Book</h2>
+          <h4>Title: Le Petit Prince </h4>
+          <h5>Author: Antoine de Saint-Exupéry</h5>
+          <p>
+            Le Petit Prince tells the story of a young prince who travels from planet to planet, meeting various inhabitants and learning valuable life lessons along the way. Through encounters with characters like the fox and the rose, the prince gains insights into friendship, love, and the importance of seeing with the heart.
+          </p>
+        </div>
+        <div class="image col-md-3 p-3">
+          <img
+            class="img-fluid"
+            src="{% static 'img/little_princes.jpeg'%}"
+            class="d-block w-100"
+            alt="..."
+          />
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+        <div
+        class="d-flex container row m-auto align-items-center justify-content-around"
+      >
+        <div class="write col-md-9">
+          <h2>Latest Book</h2>
+          <h4>Title: The Book Thief</h4>
+          <h5>Author: Markus Zusak</h5>
+          <p>
+            "The Book Thief" is a captivating and heart-wrenching novel set in Nazi Germany during World War II. The story follows Liesel Meminger, a young girl living with foster parents, as she discovers the power of words and books in the midst of darkness and destruction. Narrated by Death, the novel explores themes of love, loss, courage, and the resilience of the human spirit. Through Liesel's journey and her bond with her family and friends, readers are taken on an emotional rollercoaster that leaves a lasting impact. "The Book Thief" is a moving tale that celebrates the transformative power of storytelling and the triumph of the human spirit in the face of adversity.
+          </p>
+         
+        </div>
+        <div class="image col-md-3 p-3">
+          <img
+            class="img-fluid"
+            src="{% static 'img/The Book Thief.jpeg'%}"
+            class="d-block w-100"
+            alt="..."
+          />
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+        <div
+        class="d-flex container row m-auto align-items-center justify-content-around"
+      >
+        <div class="write col-md-9">
+          <h2>Latest Book</h2>
+          <h4>Title: At Night All Blood Is Black</h4>
+          <h5>Author: David</h5>
+          <p>
+            "At Night All Blood Is Black" is a poignant and visceral novel set during World War I.
+             It delves into themes of grief, rage, and the human cost of war, as seen through the 
+             eyes of a Senegalese soldier fighting for France. This gripping narrative falls under the 
+             categories of historical fiction and war literature.
+          </p>
+        </div>
+        <div class="image col-md-3 p-3">
+          <img
+            class="img-fluid"
+            src="{% static 'img/Things_to_leave_behind.jpeg'%}"
+            class="d-block w-100"
+            alt="..."
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExample"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExample"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</div>
+
+
+
+
+<div class="card-back" style="background-color: #DBE4E8; padding: 20px;">
+<div class="container mt-4">
+    <h5 class="text-center font-weight-bold mb-4">All Book Categories</h5>
+    <div class="row">
+      {% for cat in category %}
+      <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+        <div class="bg-primary text-white rounded-full text-center cursor-pointer hover:bg-light">
+          <a href="{% url 'category_wise_book' cat.slug %}" class="text-decoration-none text-white py-2 px-4 d-block">{{ cat.name }}</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <div class="d-flex flex-wrap p-4 " style="margin-bottom:150px">
+    <div class="p-3">
+        <h4>{{ data.0.Brand.name }} found: {{ data | length }}</h4>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4"> <!-- Adjust the number of columns and gap size as needed -->
+            {% for dt in data %}
+            <div class="col mb-4  g-4">
+                <div class="card" style="min-width: 200px;"> <!-- Adjust the minimum width as needed -->
+                    <div class="card-body">
+                        <img src="{{dt.image.url}}" class="card-img-top" alt="">
+                        <h5 class="card-title">{{dt.title}}</h5>
+                        <h6 class="card-title">{{dt.author}}</h6>
+                        <h6 class="card-title">{{dt.ISBN}}</h6>
+                        <h6 class="card-title">Available Status: {{dt.availability_status}}</h6>
+                        <h6 class="card-title">Borrow Price: {{dt.borrowing_price}} taka</h6>
+                        <p>
+                            Category:
+                            {% for cat in dt.category.all %}
+                            <button class="btn btn-warning btn-sm m-2" disabled>{{cat.name}}</button>
+                            {% endfor %}
+                        </p>
+                        <p class="card-text">{{dt.description|truncatewords:10}}</p>
+                        <a href="{% url 'detail_book' dt.id %}" class="btn btn-primary mb-2">View Details</a>
+                        {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'add_to_wishlist' book_id=dt.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn" style="background-color:#007F73">Add to Wishlist</button>
+                        </form>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
