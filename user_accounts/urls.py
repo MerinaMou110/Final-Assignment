@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import UserRegistrationView ,UserLoginView, UserLogoutView,UserAccountUpdateView,CustomPasswordChangeView
+from .views import UserRegistrationView ,UserLoginView, UserLogoutView,UserAccountUpdateView,CustomPasswordChangeView,activate
 from library.views import TransactionReportView
 urlpatterns = [
     
@@ -11,7 +11,10 @@ urlpatterns = [
 
         path('update_profile/', UserAccountUpdateView.as_view(), name='profile' ),
         path('report/',TransactionReportView.as_view(), name='report' ),
-        # path('profile/',TransactionReportView.as_view(), name='profile' ),
+        
         path('password_change/', CustomPasswordChangeView.as_view(), name='password_change'),
+
+        path('activate/<uidb64>/<token>', activate, name='activate')
+
         
 ]
