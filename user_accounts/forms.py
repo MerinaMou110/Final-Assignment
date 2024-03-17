@@ -21,6 +21,7 @@ class UserRegistrationForm(UserCreationForm):
     def save(self, commit=True):
         
         our_user = super().save(commit=False) 
+        our_user.is_active = False
         if commit == True:
             our_user.save() 
 

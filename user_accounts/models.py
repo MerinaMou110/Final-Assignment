@@ -14,7 +14,7 @@ class UserAccount(models.Model):
     birth_date = models.DateField(null=True, blank=True)
     initial_borrowing_date = models.DateField(auto_now_add=True)
     phone_num = models.CharField(max_length=15)
-
+   
     def __str__(self):
         return str(self.user.first_name)
 

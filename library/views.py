@@ -187,7 +187,6 @@ def borrow_book(request, book_id):
     return redirect('detail_book', id=book_id)
 
 
-
 class TransactionReportView(LoginRequiredMixin, ListView):
     template_name = 'report.html'
     model = Transaction
