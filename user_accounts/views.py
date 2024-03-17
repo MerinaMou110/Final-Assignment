@@ -94,7 +94,13 @@ class UserRegistrationView(FormView):
         user.is_active=False
         user.save()
 
-        UserAccount.objects.create(user=user)
+        UserAccount.objects.create(
+            user=user,
+            gender=form.cleaned_data.get('gender'),
+            account_no=100000 + user.id,  # Example calculation for account_no
+            birth_date=form.cleaned_data.get('birth_date'),
+            phone_num=form.cleaned_data.get('phone_num'),
+        )
         activateEmail(self.request,user,form.cleaned_data.get('email'))
 
         # login(self.request, user) 
