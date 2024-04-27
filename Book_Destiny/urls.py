@@ -25,7 +25,8 @@ urlpatterns = [
     path('accounts/',include('user_accounts.urls')),
      path('category/<slug:category_slug>/', home, name='category_wise_book'),
     path('library/',include('library.urls')),
-    path('wishlist/',include('wishlist.urls'))
+    path('wishlist/',include('wishlist.urls')),
+    path('contact/',include('contact.urls'))
 ]
 urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

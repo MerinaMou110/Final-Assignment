@@ -1,79 +1,107 @@
 {% extends 'base.html' %} 
-{% load static %}
+{% load static %} 
 {% load humanize %} 
-{% block head_title %} Transaction Report{% endblock %} 
-{% block content %}
+{% block head_title %} Transaction Report{% endblock %} {% block content %} 
 
-<div class="container my-5">
-    <div class="card">
-        <div class="card-body">
-            <h1 class="font-bold text-3xl text-center py-5">Borrowing History</h1>
-            <hr>
+<div class="container my-5 p-5" style="background-color:#80D0C7;">
+  <div class="card">
+    <div class="card-body">
+      <h1 class=" text-center py-5">Borrowing History</h1>
+      <hr />
 
-            <form method="get" action="{% url 'report' %}" class="row justify-content-center mt-5">
-                <div class="col-md-5 mb-3">
-                    <label for="start_date" class="form-label">From:</label>
-                    <input type="date" class="form-control" id="start_date" name="start_date">
-                </div>
-                <div class="col-md-5 mb-3">
-                    <label for="end_date" class="form-label">To:</label>
-                    <input type="date" class="form-control" id="end_date" name="end_date">
-                </div>
-                <div class="col-md-2 mb-3 d-grid">
-                    <button type="submit" class="btn btn-primary btn-block">Filter</button>
-                </div>
-            </form>
+      <form
+        method="get"
+        action="{% url 'report' %}"
+        class="row justify-content-center mt-5"
+      >
+        <div class="col-md-5 mb-3">
+          <label for="start_date" class="form-label">From:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="start_date"
+            name="start_date"
+          />
         </div>
-    </div>
-
-    <div class="card mt-5">
-        <div class="card-body">
-            <table class="table table-bordered table-striped mt-3">
-                <thead class="bg-primary text-white text-left">
-                    <tr>
-                        <th>Date</th>
-                        <th>Transaction ID</th>
-                        <th>Book Title</th>
-                        <th>Book Author</th>
-                        <th>Price</th>
-                        <th>Available Copies</th>
-                        <th>Balance After Transaction</th>
-                        <th>Return Book</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for transaction in borrowing_history %}
-                    <tr>
-                        <td>{{ transaction.timestamp|date:"F d, Y h:i A" }}</td>
-                        <td>{{ transaction.id }}</td>
-                        <td>{% if transaction.book %}{{ transaction.book.title }}{% else %}N/A{% endif %}</td>
-                        <td>{% if transaction.book %}{{ transaction.book.author }}{% endif %}</td>
-                        <td>${{ transaction.amount|floatformat:2|intcomma }}</td>
-                        <td>{{ transaction.book.available_copies }}</td>
-                        <td>${{ transaction.balance_after_transaction|floatformat:2|intcomma }}</td>
-                        <td>
-                            {% if not transaction.paid %}
-                            <form method="post" action="{% url 'return_book' transaction.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="transaction_id" value="{{ transaction.id }}">
-                                <button type="submit" class="btn btn-danger">Return</button>
-                            </form>
-                            {% else %}
-                            <button type="submit" class="btn btn-success">Return</button>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <div class="col-md-5 mb-3">
+          <label for="end_date" class="form-label">To:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="end_date"
+            name="end_date"
+          />
         </div>
+        <div class="col-md-2 mb-3 d-grid">
+          <button type="submit" class="btn btn-primary btn-block">
+            Filter
+          </button>
+        </div>
+      </form>
     </div>
-    <div class="mt-5">
-        <h3 class="font-bold text-white">Current Balance</h3>
-        <p class="mb-4 text-white">Your current balance is: ${{ account.balance|floatformat:2|intcomma }}</p>
-    </div>
+  </div>
 
+  <div class="card mt-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped mt-3">
+        <thead class="bg-primary text-white text-left">
+          <tr>
+            <th>Date</th>
+            <th>Transaction ID</th>
+            <th>Book Title</th>
+            <th>Book Author</th>
+            <th>Price</th>
+            <th>Available Copies</th>
+            
+            <th>Return Book</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for transaction in borrowing_history %}
+          <tr>
+            <td>{{ transaction.timestamp|date:"F d, Y h:i A" }}</td>
+            <td>{{ transaction.id }}</td>
+            <td>
+              {% if transaction.book %}
+                 {{ transaction.book.title }}
+              {% else %}N/A{% endif %}
+            </td>
+            <td>
+              {% if transaction.book %}{{ transaction.book.author }}{% endif %}
+            </td>
+            <td>${{ transaction.amount|floatformat:2|intcomma }}</td>
+            <td>{{ transaction.book.available_copies }}</td>
+            
+            <td>
+              {% if not transaction.paid %}
+              <form
+                method="post"
+                action="{% url 'return_book' transaction.id %}"
+              >
+                {% csrf_token %}
+                <input
+                  type="hidden"
+                  name="transaction_id"
+                  value="{{ transaction.id }}"
+                />
+                <button type="submit" class="btn btn-danger">Return</button>
+              </form>
+              {% else %}
+              <button type="submit" class="btn btn-success">Return</button>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="mt-5">
+    <h3 class="font-bold text-white">Current Balance</h3>
+    <p class="mb-4 text-white">
+      Your current balance is: ${{ account.balance|floatformat:2|intcomma }}
+    </p>
+  </div>
 </div>
-
 
 {% endblock %}

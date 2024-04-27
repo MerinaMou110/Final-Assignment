@@ -1,5 +1,6 @@
 {% extends 'base.html' %} 
 {% load crispy_forms_tags %} 
+
 {% block content %}
 
 {% if form.non_field_errors %}
@@ -9,16 +10,16 @@
     </div>
   {% endfor %}
 {% endif %} 
-<div class="container mt-5 mb-4">
+<div class="container  mb-4 p-5" style="margin-top:70px; background-color:#F0F8FF;">
   <div class="row justify-content-center">
   <div class="col-md-9">
-  <div class="card">
+  <div class="card border-0 rounded">
     <div class="card-body">
       <h1 class="card-title text-center mb-4">Update Your Profile</h1>
       <form method="post" class="needs-validation" novalidate>
         {% csrf_token %}
         <div class="mb-3">
-          <a class="btn btn-warning btn-sm" href="{%  url 'password_change'%}">Change Your Password</a>
+          <a class="btn custom-btn" href="{%  url 'password_change'%}">Change Your Password</a>
       </div>
         {% for hidden_field in form.hidden_fields %}
           {{ hidden_field.errors }}
@@ -38,7 +39,7 @@
 
         <!-- Submit button -->
         <div class="text-center mt-4">
-          <button class="btn btn-primary" type="submit">Update Profile</button>
+          <button class="btn custom-btn" type="submit">Update Profile</button>
         </div>
       </form>
     </div>

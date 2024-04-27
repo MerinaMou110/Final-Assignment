@@ -5,57 +5,27 @@
 
 
 
-
-{% if form.non_field_errors %}
-  {% for error in form.non_field_errors %}
-    <div class="alert alert-danger" role="alert">
-      {{ error }}
-    </div>
-  {% endfor %}
-{% endif %} 
-
-<style>
-    body {
-        background-image: url('{% static "img/1.jpg" %}') ;
-        background-repeat: no-repeat;
-       background-position: center; 
- 
-        background-size: cover;
-        visibility: visible;
-    
-       
-    }
-    .card {
-        background-color: black;
-        color: white;
-        padding: 20px; 
-    }
-</style>
-
-
-
-
-{% comment %} <form style="width:50% ; margin : auto" method="post">
-    
-    {% csrf_token %} {% for hidden_field in form.hidden_fields %} {{ hidden_field.errors }} {{ hidden_field }} {% endfor %}
-    {{ form|crispy }}
-    <button class="btn btn-warning mb-5">Submit</button>
-</form>  {% endcomment %}
-<div class="container mt-5 mb-4">
+<div class=" section-padding section-bg container ">
     <div class="row justify-content-center">
-    <div class="col-md-7">
-    <div class="card">
-      <div class="card-body">
-        <h1 class="card-title text-center mb-4">Register</h1>
-  
-        <!-- Registration Form -->
-        <form method="post" class="needs-validation" novalidate>
-          {% csrf_token %}
-          {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field.errors }}
-            {{ hidden_field }}
-          {% endfor %}
-          {% for field in form %}
+        <!-- Image on the left side -->
+        <div class="col-md-5 mb-4">
+            <img src="{% static 'img/signup.png' %}" class="img-fluid" alt="Image">
+        </div>
+
+        <!-- Form on the right side -->
+        <div class="col-md-7">
+            <div class="card border-0">
+                <div class="card-body">
+                    <h1 class="card-title text-center mb-4">Register</h1>
+    
+                    <!-- Registration Form -->
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        {% for hidden_field in form.hidden_fields %}
+                            {{ hidden_field.errors }}
+                            {{ hidden_field }}
+                        {% endfor %}
+                        {% for field in form %}
                             <div class="mb-3">
                                 {{ field.label_tag }}
                                 {{ field }}
@@ -66,17 +36,17 @@
                                 {% endif %}
                             </div>
                         {% endfor %}
-  
-          <!-- Submit button -->
-          <div class="text-center mt-4">
-            <button class="btn btn-primary" type="submit">Register</button>
-          </div>
-        </form>
-      </div>
+    
+                        <!-- Submit button -->
+                        <div class="text-center mt-4">
+                            <button class="btn text-white" type="submit" style="background-color:#80D0C7">Register</button>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-</div>
-  </div>
-
 
 {% endblock  %}

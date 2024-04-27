@@ -18,6 +18,10 @@ from django.utils.encoding import force_bytes, force_str
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 from .models import UserAccount
+from django.shortcuts import render
+  
+
+
 
 def send_email_user(user,  subject, template):
         message = render_to_string(template, {
@@ -28,22 +32,6 @@ def send_email_user(user,  subject, template):
         send_email.attach_alternative(message, "text/html")
         send_email.send()
 
-# class UserRegistrationView(FormView):
-#     template_name = 'user_registration.html'
-#     form_class = UserRegistrationForm
-#     success_url = reverse_lazy('login') 
-    
-#     def form_valid(self,form):
-#         print(form.cleaned_data)
-       
-#         user = form.save()  
-#         # login(self.request, user) 
-#         print(user)
-#         messages.success(
-#             self.request,
-#             f'Your Account Registration successfully'
-#         )
-#         return super().form_valid(form)
 
             #this is for email confirmation      
 def activate(request, uidb64, token):
@@ -160,3 +148,12 @@ class CustomPasswordChangeView(PasswordChangeView):
         messages.success(self.request, 'Your password has been changed successfully.')
         return response
     
+
+
+
+def about_page(request):
+    return render(request, 'library_about_page.html')
+
+
+def contact(request):
+    return render(request, 'contact_form.html')

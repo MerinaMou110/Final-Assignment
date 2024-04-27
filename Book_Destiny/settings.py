@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "library",
     "wishlist",
     "category",
+    "contact",
      'crispy_forms',
     'crispy_bootstrap5',
 ]
