@@ -23,7 +23,12 @@
                     <p class="card-text">ISBN: {{ book.ISBN }}</p>
                     <p class="card-text">Publication Date: {{ book.publication_date }}</p>
                     <p class="card-text">Genre: {{ book.genre }}</p>
-                    <p class="card-text">Availability Status: {{ book.availability_status }}</p>
+                    {% if  book.availability_status %}
+                    <p class="card-text">Availability Status: Available</p>
+                    {% else %}
+                    <p class="card-text">Availability Status: Out Of Stock</p>
+                    {% endif %}
+                    {% comment %} <p class="card-text">Availability Status: {{ book.availability_status }}</p> {% endcomment %}
                     <p class="card-text">Available Copies: {{ book.available_copies }}</p>
                     <p class="card-text">Borrow Price: {{ book.borrowing_price }} taka</p>
                     <p class="card-text">{{ book.description }}</p>
