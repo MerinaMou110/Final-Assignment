@@ -30,8 +30,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Your secret key
 SECRET_KEY = env("SECRET_KEY")
 # SSLCommerz credentials
-SSL_STORE_ID = env("SSL_STORE_ID")
-SSL_STORE_PASS = env("SSL_STORE_PASS")
+# SSL_STORE_ID = env("SSL_STORE_ID")
+# SSL_STORE_PASS = env("SSL_STORE_PASS")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
