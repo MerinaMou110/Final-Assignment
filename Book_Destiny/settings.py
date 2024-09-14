@@ -37,14 +37,15 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ['https://final-assignment-1.onrender.com','https://*.127.0.0.1','sandbox.sslcommerz.com', 'securepay.sslcommerz.com'] # first part will be your deploy project’s domain name
+ALLOWED_HOSTS = ['final-assignment-1.onrender.com', '127.0.0.1', 'localhost']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://sandbox.sslcommerz.com',  # For sandbox testing
-    'https://securepay.sslcommerz.com',  # For live payment
-   
+    'https://final-assignment-1.onrender.com',  # Your deployed domain
+    'https://sandbox.sslcommerz.com',           # SSLCommerz sandbox
+    'https://securepay.sslcommerz.com',         # SSLCommerz live
+    'https://127.0.0.1',                        # Localhost (if using for local dev)
 ]
+
 
 
 # Application definition
