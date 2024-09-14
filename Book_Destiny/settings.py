@@ -38,7 +38,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ['https://final-assignment-1.onrender.com','https://*.127.0.0.1'] # first part will be your deploy project’s domain name
+CSRF_TRUSTED_ORIGINS = ['https://final-assignment-1.onrender.com','https://*.127.0.0.1','sandbox.sslcommerz.com', 'securepay.sslcommerz.com'] # first part will be your deploy project’s domain name
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://sandbox.sslcommerz.com',  # For sandbox testing
+    'https://securepay.sslcommerz.com',  # For live payment
+   
+]
 
 
 # Application definition
