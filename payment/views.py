@@ -6,11 +6,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib import messages
 from sslcommerz_lib import SSLCOMMERZ
+from django.contrib.auth.decorators import login_required
 import uuid
 
 def unique_transaction_id_generator():
     return str(uuid.uuid4())  # Generates a unique transaction ID
 
+@login_required
 def checkout(request):
     # Fetch the user's active order (if any)
     try:
