@@ -1,0 +1,6 @@
+ 
+
+ username=khadija
+ pass=mounys@1234
+ Store ID: bookd66e4226b7822b
+Store Password : bookd66e4226b7822b@ssl

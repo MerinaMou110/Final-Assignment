@@ -11,37 +11,58 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
         {% if request.user.is_authenticated %}
-        <li class="nav-item">
+        {% comment %} <li class="nav-item">
           <a class="nav-link" href="{% url 'report'%}">Report</a>
-        </li>
-
-        <li class="nav-item">
+        </li> {% endcomment %}
+        
+        {% comment %} <li class="nav-item">
           <a class="nav-link" href="{% url 'deposit_money'%}">Deposit</a>
+        </li>
+         {% endcomment %}
+        <!-- Added Order List link -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'payment:ordersitem' %}">Order List</a>
         </li>
         {% endif %}
         <li class="nav-item">
-          <a class="nav-link " href="{% url 'contact_submit' %}">Contact</a>
+          <a class="nav-link" href="{% url 'contact_submit' %}">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About us</a>
         </li>
         {% if request.user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link " href="{% url 'wishlist' %}"><i class="fa-solid fa-heart"></i></a>
+          <a class="nav-link" href="{% url 'wishlist' %}"><i class="fa-solid fa-heart"></i></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link " >Welcome, {{ request.user.first_name }} (balance: {{ request.user.account.balance }})</a>
+         <!-- Cart Icon with Cart Count -->
+         <li class="nav-item">
+          <a class="nav-link position-relative" href="{% url 'order:cart' request.user.id 1 %}">
+            <i class="fa-solid fa-cart-shopping" style="font-size: 20px;"></i>
+            {% if cart_count > 0 %}
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ cart_count }}
+              <span class="visually-hidden">items in cart</span>
+            </span>
+            {% endif %}
+          </a>
         </li>
+        {% comment %} <li class="nav-item">
+          <a class="nav-link">Welcome, {{ request.user.first_name }} (balance: {{ request.user.account.balance }})</a>
+        </li> {% endcomment %}
         {% endif %}
       </ul>
 
       <ul class="navbar-nav ms-auto">
+       
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 24px;">
             <i class="fa-regular fa-user"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownProfile">
             {% if request.user.is_authenticated %}
-            <li><a class="dropdown-item" href="{% url 'profile' %}" >Profile</a></li>
+            <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
             <li>
               <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}

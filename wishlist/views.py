@@ -11,7 +11,7 @@ from library.models import Book
 def wishlist(request):
     wishlist = Wishlist.objects.filter(user=request.user)
 
-    return render(request, 'cart.html', {'wishlist': wishlist})
+    return render(request, 'wishlist.html', {'wishlist': wishlist})
 
 @login_required
 def add_to_wishlist(request, book_id):

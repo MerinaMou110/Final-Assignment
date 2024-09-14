@@ -58,44 +58,35 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    birth_date = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}))
+    birth_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     gender = forms.ChoiceField(choices=GENDER_TYPE)
-
-    phone_num = forms.CharField(max_length=15)
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email']
 
-    def __init__(self, *args, **kwargs):
-        super(UserUpdateForm, self).__init__(*args, **kwargs)
-        if self.instance:
-            try:
-                user_account = self.instance.account
-            except UserAccount.DoesNotExist:
-                user_account = None
-
-            if user_account:
-                self.fields['gender'].initial = user_account.gender
-                self.fields['birth_date'].initial = user_account.birth_date
-                
-                self.fields['phone_num'].initial = user_account.phone_num
-
-    def save(self, commit=True):
-        user = super(UserUpdateForm, self).save(commit=False)
-        if commit:
-            user.save()
-            user_account, created = UserAccount.objects.get_or_create(user=user)
-           
-            user_account.gender = self.cleaned_data['gender']
-            user_account.birth_date = self.cleaned_data['birth_date']
-            user_account.phone_num = self.cleaned_data['phone_num']
-            user_account.save()
-        return user
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs.update({
-                'class': 'form-control form-control-lg bg-light border-0 rounded-0',
-                'style': 'font-size: 14px; padding: 15px;',
+                'class': (
+                    'appearance-none block w-full bg-gray-200 '
+                    'text-gray-700 border border-gray-200 rounded '
+                    'py-3 px-4 leading-tight focus:outline-none '
+                    'focus:bg-white focus:border-gray-500'
+                )
             })
+        if self.instance and hasattr(self.instance, 'profile'):
+            user_profile = self.instance.profile
+            self.fields['gender'].initial = user_profile.gender
+            self.fields['birth_date'].initial = user_profile.birth_date
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+            user_profile, created = UserProfile.objects.get_or_create(user=user)
+            user_profile.gender = self.cleaned_data['gender']
+            user_profile.birth_date = self.cleaned_data['birth_date']
+            user_profile.save()
+        return user

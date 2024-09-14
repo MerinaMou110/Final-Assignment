@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     "wishlist",
     "category",
     "contact",
+    "payment",
+    "order",
      'crispy_forms',
     'crispy_bootstrap5',
 ]
@@ -83,6 +85,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'order.context_processors.cart_item_count',
             ],
         },
     },

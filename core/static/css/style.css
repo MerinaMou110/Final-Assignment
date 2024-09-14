@@ -74,4 +74,120 @@
 }
 
 
-  */
+/* Hero Section Padding */
+.hero-section {
+    padding: 60px 0;
+}
+
+/* Card Image Styling */
+.card-img-top {
+    border-radius: 0.5rem;
+}
+
+/* Card Body Padding */
+.card-body {
+    padding: 2rem;
+}
+
+/* Card Title Styling */
+.card-title {
+    font-size: 1.5rem; /* Adjusted font size */
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Card Subtitle Styling */
+.card-subtitle {
+    font-size: 1.25rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+/* Card Text Styling */
+.card-text {
+    font-size: 0.875rem; /* Adjusted font size */
+    margin-bottom: 0.5rem;
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color:#4B93A1; /* Custom primary button background */
+    border: 2px solid transparent;
+    color: #ffffff;
+    font-weight: bold;
+    line-height: normal;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #4B93A1; /* Darker shade for hover */
+    border-color: #004085; /* Darker border shade */
+    color: #ffffff;
+}
+
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+    background-color: transparent;
+    transition: all 0.3s;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #ffffff;
+}
+
+/* Button for Details */
+.btn-primary {
+    background-color: #4B93A1;
+    
+    color: #ffffff;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #13547A;
+  
+}
+
+/* Button for Wishlist */
+.btn-outline-secondary {
+    border-color: #ff6f61;
+    color: #ff6f61;
+    border-radius: 0.25rem;
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #ff6f61;
+    color: #ffffff;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Card Image Bottom Border */
+.card-img-top {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Card Body Padding */
+.card-body {
+    padding: 1.25rem;
+}
+
+/* Card Elements Spacing */
+.card-title, .card-subtitle, .card-text {
+    margin-bottom: 0.5rem;
+}
+
+/* Container Padding */
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_title %}
+Library Management System - Checkout
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Checkout</h1>
+
+    {% if order_items %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Author</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order_items %}
+                <tr>
+                    <td>{{ item.item.title }}</td>
+                    <td>{{ item.item.author }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.get_total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="order-summary mt-4">
+            <h2>Order Summary</h2>
+            <p><strong>Total Amount:</strong> {{ order_total }}</p>
+        </div>
+
+        <div class="mt-4">
+            <form action="{% url 'payment:payment' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+            </form>
+            {% comment %} <a href="{% url 'order:cart' %}" class="btn btn-secondary w-100 mt-2">Back to Cart</a> {% endcomment %}
+        </div>
+
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            You do not have any items in your order.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
